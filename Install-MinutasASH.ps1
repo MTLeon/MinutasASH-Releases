@@ -17,7 +17,12 @@ $hashAsset = $assets | Where-Object { $_.name -match 'SHA256\.(txt|sha256)$' } |
 if ($parts.Count -eq 0 -or -not $hashAsset) { throw 'La release no contiene todas las partes o su archivo SHA-256.' }
 
 New-Item -ItemType Directory -Force -Path $Destination | Out-Null
-$hashText = (Invoke-WebRequest -Headers $headers -Uri $hashAsset.browser_download_url).Content
+$hashResponse = Invoke-WebRequest -UseBasicParsing -Headers $headers -Uri $hashAsset.browser_download_url
+$hashText = if ($hashResponse.Content -is [byte[]]) {
+    [System.Text.Encoding]::UTF8.GetString($hashResponse.Content)
+} else {
+    [string]$hashResponse.Content
+}
 $expected = [regex]::Match($hashText, '\b[a-fA-F0-9]{64}\b').Value.ToLowerInvariant()
 if (-not $expected) { throw 'El archivo SHA-256 publicado no es válido.' }
 $installerName = ($parts[0].name -replace '\.part\d+$', '')
