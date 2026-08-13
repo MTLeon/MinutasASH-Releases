@@ -9,10 +9,10 @@ El código fuente, configuraciones y documentación interna se mantienen fuera d
 La forma recomendada es usar el instalador asistido. Abra PowerShell y ejecute:
 
 ```powershell
-irm https://raw.githubusercontent.com/MTLeon/MinutasASH-Releases/main/Install-MinutasASH.ps1 | iex
+irm -UseBasicParsing https://raw.githubusercontent.com/MTLeon/MinutasASH-Releases/main/Install-MinutasASH.ps1 | iex
 ```
 
-El script descarga las partes de la última versión indicada, las reconstruye y verifica su SHA-256 antes de abrir el instalador.
+El script descarga las partes de la última versión indicada, las reconstruye y verifica su SHA-256 antes de abrir el instalador. `-UseBasicParsing` evita el aviso propio de Windows PowerShell 5.1.
 
 También puede descargar manualmente las partes y el archivo SHA-256 desde [Releases](../../releases). Use el comando `copy /b` indicado en las notas de versión para reconstruir el instalador.
 ## Seguridad y soporte
