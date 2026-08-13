@@ -1,4 +1,4 @@
-﻿# Minutas ASH — Instaladores
+# Minutas ASH — Instaladores
 
 Este repositorio publica exclusivamente instaladores, hashes SHA-256 y notas de versión verificadas de Minutas ASH.
 
@@ -6,23 +6,15 @@ El código fuente, configuraciones y documentación interna se mantienen fuera d
 
 ## Descargar e instalar
 
-1. Abra la sección [Releases](../../releases) y descargue todos los archivos `MinutasASH_Setup_...partNN` de la versión deseada, junto con su archivo `SHA256`.
-2. Guarde todas las partes en una misma carpeta, sin cambiarles el nombre.
-3. Abra **Símbolo del sistema** en esa carpeta y ejecute:
+La forma recomendada es usar el instalador asistido. Abra PowerShell y ejecute:
 
-   ```bat
-   copy /b MinutasASH_Setup_2.3.4_Online.exe.part01+MinutasASH_Setup_2.3.4_Online.exe.part02+MinutasASH_Setup_2.3.4_Online.exe.part03+MinutasASH_Setup_2.3.4_Online.exe.part04 MinutasASH_Setup_2.3.4_Online.exe
-   ```
+```powershell
+irm https://raw.githubusercontent.com/MTLeon/MinutasASH-Releases/main/Install-MinutasASH.ps1 | iex
+```
 
-4. Opcionalmente, compruebe el archivo resultante:
+El script descarga las partes de la última versión indicada, las reconstruye y verifica su SHA-256 antes de abrir el instalador.
 
-   ```powershell
-   Get-FileHash .\MinutasASH_Setup_2.3.4_Online.exe -Algorithm SHA256
-   ```
-
-   El resultado debe coincidir con el hash publicado en la versión.
-5. Ejecute `MinutasASH_Setup_2.3.4_Online.exe` y siga el asistente. Windows puede pedir confirmación al instalar software descargado de Internet.
-
+También puede descargar manualmente las partes y el archivo SHA-256 desde [Releases](../../releases). Use el comando `copy /b` indicado en las notas de versión para reconstruir el instalador.
 ## Seguridad y soporte
 
 - Descargue instaladores únicamente desde este repositorio y confirme su hash SHA-256.
