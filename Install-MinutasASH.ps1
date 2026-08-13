@@ -30,7 +30,7 @@ try {
     try {
         foreach ($part in $parts) {
             Write-Host "Descargando $($part.name)..."
-            $response = Invoke-WebRequest -Headers $headers -Uri $part.browser_download_url
+            $response = Invoke-WebRequest -UseBasicParsing -Headers $headers -Uri $part.browser_download_url
             $stream.Write($response.Content, 0, $response.Content.Length)
         }
     } finally { $stream.Dispose() }
